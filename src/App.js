@@ -9,6 +9,8 @@ import Balance from './Components/Balance';
 import Bind from './Components/Tas/Bind';
 import Getdata from './Components/Tas/Getdata';
 import Client from './Components/Tas/Client';
+import Student from './Components/Api/Student';
+import Category from './Components/Api/Category';
 
 function App() {
   return (
@@ -23,6 +25,8 @@ function App() {
         <Route path='/bind' element={<Bind/>}/>
         <Route path='/get' element={<Getdata/>}/>
         <Route path='client'element={<Client/>}/>
+        <Route path='/Student' element={<Student/>}/>
+        <Route path='/Category' element={<Category/>}/>
       </Routes>
       </BrowserRouter>
      </div>

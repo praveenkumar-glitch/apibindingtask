@@ -12,6 +12,8 @@ const Nav = () => {
       <Link to='/bind'><Button>Bind</Button></Link>
       <Link to='/get'><Button>Getdata</Button></Link>
       <Link to='/client'><Button>Client</Button></Link>
+      <Link to='/Student'><Button>Student</Button></Link>
+      <Link to='/Category'><Button>Category</Button></Link>
     </div>
   )
 }
