@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { Button } from 'react-bootstrap'
 import React, { useEffect, useState } from 'react'
-import DataTable from 'react-data-table-component'
+import DataTable, { SortOrder } from 'react-data-table-component'
 
 const Client = () => {
     const [cli, setcli]=useState()
@@ -46,7 +46,8 @@ const Client = () => {
     let ser=[
         {
             name:'Id',
-            selector:row =>row.clientId
+            selector:row =>row.clientId,
+            
         },
         {
             name:'ClientName',

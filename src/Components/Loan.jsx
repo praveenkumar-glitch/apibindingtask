@@ -1,10 +1,15 @@
 import { useFormik } from 'formik'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Button } from 'react-bootstrap';
 import * as Yup from 'yup';
+import { langContext } from '../App';
+
 
 const Loan = () => {
+
+    const {lang}=useContext(langContext)
     const [emi, setemi] = useState(null)
+    
     const [interest, setinterest] = useState(null)
     const [payment, setpayment] = useState(null)
 
@@ -75,6 +80,8 @@ const Loan = () => {
 
     return (
         <div>
+
+            <h1>{lang}</h1>
             <form onSubmit={formik.handleSubmit} onReset={reset}>
                 <input placeholder='Amount' name='amount' value={formik.values.amount} onChange={formik.handleChange}/>
                 {formik.errors.amount && <p className='text-danger'>{formik.errors.amount}</p>}

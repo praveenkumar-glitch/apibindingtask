@@ -8,6 +8,7 @@ const Category = () => {
     const[user, setuser]=useState([])
     const[adduser, setadduser]=useState(
         {
+            categoryId:'',
             category:'',
             description:'',
             deletedOn:'',
@@ -33,10 +34,6 @@ const Category = () => {
 
     function Handlesubmit(e){
         e.preventDefault()
-        if(edit){
-            axios.post(`http://catodotest.elevadosoftwares.com/Category/InsertCategory/${adduser.categoryId}`,adduser)
-            setedit(false)
-        }else{
         axios.post('http://208.109.34.247:8012/Category/InsertCategory',adduser)
         .then((res)=>{
             one()
@@ -47,8 +44,9 @@ const Category = () => {
         icon: "success",
          draggable: true
         });
-    }
+        
         setadduser({
+            categoryId:'',
             category:'',
             description:'',
             deletedOn:'',
@@ -128,11 +126,11 @@ const Category = () => {
 }     
   return (
     <div>
-        <form onSubmit={Handlesubmit}>
+        <form onSubmit={(e) =>Handlesubmit(e)}>
             <input placeholder='categoryname' name='category'  onChange={Handlechange} value={adduser.category}/>
             <input placeholder='description' name='description' onChange={Handlechange} value={adduser.description}/>
             <input placeholder='createdBy' name='createdBy' onChange={Handlechange} value={adduser.createdBy}/>
-           {edit ? <Button type='update'>Update</Button> : <Button type='submit'>Add</Button>}
+           {edit ? <Button type='submit'>Update</Button> : <Button type='submit'>Add</Button>}
         </form>
       <DataTable 
       columns={col}
