@@ -34,7 +34,7 @@ const Bind = () => {
     function Handlesubmit(e) {
         e.preventDefault()
         console.log(addemp);
-        
+
         if (edit) {
             axios.post('http://208.109.34.247:8012/Employee/InsertEmployee', addemp)
             Swal.fire({
@@ -48,9 +48,9 @@ const Bind = () => {
             axios.post('http://208.109.34.247:8012/Employee/InsertEmployee', addemp)
                 .then((e) => {
                     console.log(addemp);
-                    
+
                     getemp()
-            })
+                })
 
             Swal.fire({
                 title: "Added successfully",
@@ -61,7 +61,7 @@ const Bind = () => {
         setaddemp({
             employeeId: 0,
             employeeName: '',
-            mobile: '', 
+            mobile: '',
             userName: '',
             password: null,
             confirmPassword: null,
@@ -70,7 +70,7 @@ const Bind = () => {
             createdBy: '',
             deviceId: ''
         })
-            
+
         getemp()
 
     }
@@ -105,7 +105,7 @@ const Bind = () => {
             name: 'Update',
             selector: row => <Button variant='success' onClick={() => up(row)}>Update</Button>
         }
-        
+
     ]
 
     function up(data) {
@@ -148,6 +148,7 @@ const Bind = () => {
                 <input placeholder='createdBy' name='createdBy' onChange={Handlechange} value={addemp.createdBy} />
                 {edit ? <Button type='submit'>Update</Button> : <Button type='submit'>Add</Button>}
             </form>
+
             <DataTable
                 columns={col}
                 data={emp}

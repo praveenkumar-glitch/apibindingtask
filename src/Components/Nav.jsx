@@ -14,6 +14,8 @@ const Nav = () => {
       <Link to='/client'><Button>Client</Button></Link>
       <Link to='/Student'><Button>Student</Button></Link>
       <Link to='/Category'><Button>Category</Button></Link>
+      <Link to='/gett'>Gett</Link>
+      <Link to='/php'>ppp</Link>
     </div>
   )
 }

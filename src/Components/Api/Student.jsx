@@ -9,8 +9,8 @@ import { Link } from 'react-router-dom'
 
 const Student = () => {
 
-    const [id,setid]=useState('')
-    const [virat,setvirat]=useState()
+    const [id, setid] = useState('')
+    const [virat, setvirat] = useState()
     const [stu, setstu] = useState()
     const [addstu, setaddstu] = useState({
         studentId: '',
@@ -19,7 +19,7 @@ const Student = () => {
         year: '',
         department: '',
         gender: '',
-        __v:0
+        __v: 0
     })
 
 
@@ -44,7 +44,7 @@ const Student = () => {
         setShowone(true);
     };
 
-    
+
 
     function one() {
         axios.get('http://92.205.109.210:8051/api/getall')
@@ -90,11 +90,20 @@ const Student = () => {
         e.preventDefault()
         console.log(addstu);
         if (isEdit) {
-            axios.post(`http://92.205.109.210:8051/api/update/${addstu.studentId}`, addstu)
+
             Swal.fire({
-                title: "Updated Successfully!",
-                icon: "success",
-                draggable: true
+                title: "Do you want to save the changes?",
+                showDenyButton: true,
+                showCancelButton: true,
+                confirmButtonText: "Save",
+                denyButtonText: `Don't save`
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    axios.post(`http://92.205.109.210:8051/api/update/${addstu.studentId}`, addstu)
+                    Swal.fire("Saved!", "", "success");
+                } else if (result.isDenied) {
+                    Swal.fire("Changes are not saved", "", "info");
+                }
             });
             setIsEdit(false)
         } else {
@@ -145,7 +154,8 @@ const Student = () => {
         },
         {
             name: 'name',
-            selector: row => row.name
+            selector: row => row.name,
+            sortable: true
         },
         {
             name: 'rollno',
@@ -190,27 +200,38 @@ const Student = () => {
     }
 
     function del(studentId) {
-        axios.post(`http://92.205.109.210:8051/api/delete/${studentId}`)
-            .then((e) => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axios.post(`http://92.205.109.210:8051/api/delete/${studentId}`)
                 Swal.fire({
-                    title: "Delete success",
-                    icon: "success",
-                    draggable: true
+                    title: "Deleted!",
+                    text: "Your file has been deleted.",
+                    icon: "success"
                 });
-                one();
-            })
+            }
+            one()
+        });
+
     }
 
-    function getStudmarkById(){
+    function getStudmarkById() {
         console.log(id);
-        
+
         axios.get(`http://92.205.109.210:8051/api/getbyidmark/${id}`)
-        .then(res=>{
-            console.log(res)
-            console.log(res.data.data);
-            setvirat(res.data.data.data)
-            
-        })
+            .then(res => {
+                console.log(res)
+                console.log(res.data.data);
+                setvirat(res.data.data.data)
+
+            })
         setid('')
     }
 
@@ -253,9 +274,9 @@ const Student = () => {
                 pagination
             />
 
-            <input onChange={(e)=>setid(e.target.value)}  />
+            <input onChange={(e) => setid(e.target.value)} />
             <button onClick={getStudmarkById}>find</button>
-            
+
         </div>
     )
 }

@@ -72,6 +72,7 @@ const Studentmark = () => {
       <DataTable
         columns={col}
         data={mark}
+        pagination
       />
     </div>
   )

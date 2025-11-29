@@ -14,6 +14,8 @@ import Category from './Components/Api/Category';
 import Studentmark from './Components/Api/Studentmark';
 import { createContext, useState } from 'react';
 import Langg from './Components/Langg';
+import Gettt from './Components/Oneee/Gettt';
+import Photo from './Components/Oneee/Photo';
 
 export const langContext=createContext()
 
@@ -59,9 +61,12 @@ function App() {
         <Route path='/Category' element={<Category/>}/>
         <Route path='/Studentmark' element={<Studentmark/>}/>
         <Route path='/langcontext' element={<Langg />} />
+        <Route path='/gett' element={<Gettt/>}/>
+        <Route path='/php' element={<Photo/>}/>
       </Routes>
       </BrowserRouter>
    </langContext.Provider>
+   
      </div>
   );
 }
